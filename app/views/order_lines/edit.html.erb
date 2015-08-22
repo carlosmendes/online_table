@@ -1,0 +1,15 @@
+<% provide(:menu, "home") %>
+
+<div class="page-header">
+  <%= link_to order_lines_path, class: 'btn btn-default' do %>
+    <span class="glyphicon glyphicon-list-alt"></span>
+    Back
+  <% end %>
+  <%= link_to @order_line, class: 'btn btn-primary' do %>
+    <span class="glyphicon glyphicon-info-sign"></span>
+    Show
+  <% end %>
+  <h1>Editing order_line</h1>
+</div>
+
+<%= render 'form' %>

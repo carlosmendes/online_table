@@ -1,0 +1,28 @@
+<% provide(:menu, "home") %>
+
+<div class="page-header">
+  <%= link_to sub_categories_path, class: 'btn btn-default' do %>
+    <span class="glyphicon glyphicon-list-alt"></span>
+    Back
+  <% end %>
+  <%= link_to edit_sub_category_path(@sub_category), class: 'btn btn-primary' do %>
+    <span class="glyphicon glyphicon-pencil"></span>
+    Edit
+  <% end %>
+  <h1>Show sub_category</h1>
+</div>
+
+<dl class="dl-horizontal">
+  <dt>Name:</dt>
+  <dd><%= @sub_category.name %></dd>
+
+  <dt>Category:</dt>
+  <dd><%= @sub_category.category_id %></dd>
+
+  <dt>Order:</dt>
+  <dd><%= @sub_category.order %></dd>
+
+  <dt>Active:</dt>
+  <dd><%= @sub_category.active %></dd>
+
+</dl>

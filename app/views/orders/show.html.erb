@@ -1,0 +1,31 @@
+<% provide(:menu, "home") %>
+
+<div class="page-header">
+  <%= link_to orders_path, class: 'btn btn-default' do %>
+    <span class="glyphicon glyphicon-list-alt"></span>
+    Back
+  <% end %>
+  <%= link_to edit_order_path(@order), class: 'btn btn-primary' do %>
+    <span class="glyphicon glyphicon-pencil"></span>
+    Edit
+  <% end %>
+  <h1>Show order</h1>
+</div>
+
+<dl class="dl-horizontal">
+  <dt>Client:</dt>
+  <dd><%= @order.client_id %></dd>
+
+  <dt>Waiter:</dt>
+  <dd><%= @order.waiter_id %></dd>
+
+  <dt>Table:</dt>
+  <dd><%= @order.table_id %></dd>
+
+  <dt>Total:</dt>
+  <dd><%= @order.total %></dd>
+
+  <dt>Status:</dt>
+  <dd><%= @order.status %></dd>
+
+</dl>

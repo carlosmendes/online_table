@@ -1,0 +1,11 @@
+<% provide(:menu, "home") %>
+
+<div class="page-header">
+  <%= link_to tables_path, class: 'btn btn-default' do %>
+    <span class="glyphicon glyphicon-list-alt"></span>
+    Back
+  <% end %>
+  <h1>New table</h1>
+</div>
+
+<%= render 'form' %>
