@@ -8,4 +8,4 @@
 
 categories = Category.create([{ name: 'Entrée', order: 1, active: true},
                               { name: 'Main', order: 2, active: true},
-                              { name: 'Dessert', order: 1, active: true}])
+                              { name: 'Dessert', order: 3, active: true}])

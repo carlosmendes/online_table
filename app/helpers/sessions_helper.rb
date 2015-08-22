@@ -31,11 +31,11 @@ module SessionsHelper
   end
 
   def manager?
-      logged_in? and current_user.manager
+      logged_in? and current_user.manager == true
   end
   
   def waiter?
-      logged_in? and current_user.waiter
+      logged_in? and current_user.waiter == true
   end
   
   # Forgets a persistent session.
