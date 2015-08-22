@@ -1,4 +1,5 @@
 class TablesController < ApplicationController
+  before_action :check_manager, only: [:new, :create, :edit, :update, :destroy]
   before_action :set_table, only: [:show, :edit, :update, :destroy]
 
   # GET /tables

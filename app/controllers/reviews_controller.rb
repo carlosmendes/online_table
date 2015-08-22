@@ -1,6 +1,8 @@
 class ReviewsController < ApplicationController
+  before_action :check_manager
   before_action :set_review, only: [:show, :edit, :update, :destroy]
-
+  
+  
   # GET /reviews
   # GET /reviews.json
   def index

@@ -9,3 +9,7 @@
 categories = Category.create([{ name: 'Entrée', order: 1, active: true},
                               { name: 'Main', order: 2, active: true},
                               { name: 'Dessert', order: 3, active: true}])
+                              
+products = Product.create([{ name: 'Beer 50cl', short_name: 'Beer 50cl', price: 1, description: 'Sagres', active: true},
+                           { name: 'Beer 75cl', short_name: 'Beer 75cl', price: 1.2, description: 'Sagres', active: true},
+                           { name: 'Bitoque', short_name: 'Bitoque', price: 5, description: 'Com ovo', active: true}])

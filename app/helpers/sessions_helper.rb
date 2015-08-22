@@ -34,6 +34,13 @@ module SessionsHelper
       logged_in? and current_user.manager == true
   end
   
+  def check_manager
+    unless manager?
+      flash[:error] = "Invalid Permissions"
+      redirect_to root_path
+    end  
+  end
+  
   def waiter?
       logged_in? and current_user.waiter == true
   end

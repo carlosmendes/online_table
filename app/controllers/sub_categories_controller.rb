@@ -1,4 +1,5 @@
 class SubCategoriesController < ApplicationController
+  before_action :check_manager
   before_action :set_sub_category, only: [:show, :edit, :update, :destroy]
 
   # GET /sub_categories
