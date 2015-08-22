@@ -20,16 +20,16 @@
   <dd><%= @product.short_name %></dd>
   
   <dt>Price:</dt>
-  <dd><%= @product.price %></dd>
+  <dd><%= number_to_currency(@product.price) %></dd>
   
   <dt>Description:</dt>
   <dd><%= @product.description %></dd>
 
   <dt>Category:</dt>
-  <dd><%= @product.category_id %></dd>
+  <dd><%= link_to @product.category.name, @product.category unless @product.category.nil? %></dd>
 
   <dt>Sub category:</dt>
-  <dd><%= @product.sub_category_id %></dd>
+  <dd><%= link_to @product.sub_category.name, @product.sub_category unless @product.sub_category.nil? %></dd>
 
   <dt>Order:</dt>
   <dd><%= @product.order %></dd>

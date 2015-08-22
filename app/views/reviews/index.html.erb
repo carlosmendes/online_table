@@ -1,4 +1,4 @@
-<% provide(:menu, "home") %>
+<% provide(:menu, "orders") %>
 
 <div class="page-header">
   <%= link_to new_review_path, class: 'btn btn-primary' do %>
@@ -25,11 +25,11 @@
 
     <tbody>
       <%= content_tag_for(:tr, @reviews) do |review| %>
-            <td><%= review.order_id %></td>
+            <td><%= link_to review.order_id, review.order %></td>
             <td><%= review.rate %></td>
             <td><%= review.title %></td>
             <td><%= review.description %></td>
-            <td><%= review.user_id %></td>
+            <td><%= link_to review.user, review.user.name %></td>
             <td><%= link_to 'Show', review %></td>
         <td><%= link_to 'Edit', edit_review_path(review) %></td>
         <td><%= link_to 'Destroy', review, method: :delete, data: { confirm: 'Are you sure?' } %></td>

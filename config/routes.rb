@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   resources :categories
 
   resources :tables
+  get 'tables-status' => 'tables#status'
   
   resources :users
   

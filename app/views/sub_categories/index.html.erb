@@ -5,7 +5,7 @@
     <span class="glyphicon glyphicon-plus"></span>
     New Sub category
   <% end %>
-  <h1>sub_categories</h1>
+  <h1>Sub Categories</h1>
 </div>
 
 <div class="table-responsive">
@@ -25,7 +25,7 @@
     <tbody>
       <%= content_tag_for(:tr, @sub_categories) do |sub_category| %>
             <td><%= sub_category.name %></td>
-            <td><%= sub_category.category_id %></td>
+            <td><%= sub_category.category.name unless sub_category.category.nil? %></td>
             <td><%= sub_category.order %></td>
             <td><%= sub_category.active %></td>
             <td><%= link_to 'Show', sub_category %></td>

@@ -15,19 +15,19 @@
   <div class="form-group">
     <%= f.label :client_id, class: "col-sm-2 control-label" %>
     <div class="col-sm-10">
-      <%= f.number_field :client_id, class: "form-control" %>
+      <%= f.select :client_id, User.all.map { |p| [p.name, p.id] }, {:include_blank => '-' }, class: "form-control" %>
     </div>
   </div>
   <div class="form-group">
     <%= f.label :waiter_id, class: "col-sm-2 control-label" %>
     <div class="col-sm-10">
-      <%= f.number_field :waiter_id, class: "form-control" %>
+      <%= f.select :waiter_id, User.all.map { |p| [p.name, p.id] }, {:include_blank => '-' }, class: "form-control" %>
     </div>
   </div>
   <div class="form-group">
     <%= f.label :table_id, class: "col-sm-2 control-label" %>
     <div class="col-sm-10">
-      <%= f.number_field :table_id, class: "form-control" %>
+      <%= f.select :table_id, Table.all.map { |p| [p.name, p.id] }, {:include_blank => '-' }, class: "form-control" %>
     </div>
   </div>
   <div class="form-group">
@@ -39,7 +39,7 @@
   <div class="form-group">
     <%= f.label :status, class: "col-sm-2 control-label" %>
     <div class="col-sm-10">
-      <%= f.text_field :status, class: "form-control" %>
+      <%= f.select :status, Order::STATUS, {:include_blank => '-' }, class: "form-control" %>
     </div>
   </div>
   <div class="form-group">
