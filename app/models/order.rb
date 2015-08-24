@@ -5,6 +5,8 @@ class Order < ActiveRecord::Base
   belongs_to :client, class_name: 'User', foreign_key: 'client_id'
   belongs_to :waiter, class_name: 'User', foreign_key: 'waiter_id'
   
+  has_many :order_lines
+  
   STATUS = ['Draft', 'Cooking', 'Paied']
   
   def self.status_draft

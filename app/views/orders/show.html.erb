@@ -9,23 +9,58 @@
     <span class="glyphicon glyphicon-pencil"></span>
     Edit
   <% end %>
-  <h1>Show order</h1>
+  <h1>Order <%= @order.id %></h1>
 </div>
 
-<dl class="dl-horizontal">
-  <dt>Client:</dt>
-  <dd><%= @order.client_id %></dd>
+<div class="row">
+	<div class="col-md-4">
+		<dl class="dl-vertical">
+		  <dt>Client</dt>
+		  <dd><%= link_to @order.client.name, @order.client %></dd>
+		
+		  <dt>Waiter</dt>
+		  <dd><%= link_to @order.waiter.name, @order.waiter %></dd>
+		</dl>
+	</div>
+	<div class="col-md-4">
+		<dl class="dl-vertical">
+		  <dt>Table</dt>
+		  <dd><%= @order.table.name %></dd>
+		  <dt>Status</dt>
+		  <dd><%= @order.status %></dd>
+		</dl>
+	</div>
+	<div class="col-md-4">
+		<dl class="dl-vertical">
+		  <dt>Total</dt>
+		  <dd><h4><%= number_to_currency(@order.total) %></h4></dd>
+		</dl>
+	</div>
+</div>
+<div class="table-responsive">
+  <table class="table table-striped table-hover">
+    <thead>
+      <tr>
+            <th>Product</th>
+            <th>Quantity</th>
+            <th>Amount</th>
+            <th>Status</th>
+            <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
 
-  <dt>Waiter:</dt>
-  <dd><%= @order.waiter_id %></dd>
-
-  <dt>Table:</dt>
-  <dd><%= @order.table_id %></dd>
-
-  <dt>Total:</dt>
-  <dd><%= @order.total %></dd>
-
-  <dt>Status:</dt>
-  <dd><%= @order.status %></dd>
-
-</dl>
+    <tbody>
+      <%= content_tag_for(:tr, @order.order_lines) do |order_line| %>
+            <td><%= order_line.product.name %></td>
+            <td><%= order_line.quantity %></td>
+            <td><%= number_to_currency(order_line.value) %></td>
+            <td><%= order_line.status %></td>
+            <td><%= link_to 'Show', order_line %></td>
+        <td><%= link_to 'Edit', edit_order_line_path(order_line) %></td>
+        <td><%= link_to 'Destroy', order_line, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <% end %>
+    </tbody>
+  </table>
+</div>

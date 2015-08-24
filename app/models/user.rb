@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
   has_secure_password
   validates :password, presence: true, length: { minimum: 6 }
   
-  has_many :orders
+  has_many :orders, class_name: 'Order', foreign_key: 'client_id'
   
   # Returns the hash digest of the given string.
   def User.digest(string)

@@ -25,8 +25,8 @@
 
     <tbody>
       <%= content_tag_for(:tr, @order_lines) do |order_line| %>
-            <td><%= order_line.order_id %></td>
-            <td><%= order_line.product_id %></td>
+            <td><%= link_to order_line.order_id, order_line.order %></td>
+            <td><%= order_line.product.name %></td>
             <td><%= order_line.quantity %></td>
             <td><%= order_line.value %></td>
             <td><%= order_line.status %></td>

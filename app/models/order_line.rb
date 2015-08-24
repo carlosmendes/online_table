@@ -7,7 +7,15 @@ class OrderLine < ActiveRecord::Base
   belongs_to :product
   belongs_to :order
   
+  after_save :update_total
+  after_destroy :update_total
+  
   STATUS = ['Draft', 'Submitted', 'Processing', 'Delivered', 'Canceled']
+
+  def update_total
+    self.order.total = OrderLine.where(:order_id => self.order_id).where('order_lines.status != ?',OrderLine.status_canceled).sum(:value)  
+    self.order.save
+  end
   
   def self.status_draft
     OrderLine::STATUS[0]
