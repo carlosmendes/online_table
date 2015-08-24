@@ -17,11 +17,19 @@ class OrderLine < ActiveRecord::Base
     OrderLine::STATUS[1]
   end
 
+  def self.status_processing
+    OrderLine::STATUS[2]
+  end
+  
   def self.status_delivered
     OrderLine::STATUS[3]
   end
-  
-  def self.get_submitted
-    OrderLine.includes(:product, :order => :table).where(:status => OrderLine.status_submitted).order(:created_at)
+
+  def self.status_canceled
+    OrderLine::STATUS[4]
+  end
+    
+  def self.get_pending
+    OrderLine.includes(:product, :order => :table).where(:status => [OrderLine.status_submitted, OrderLine.status_processing]).order(:created_at)
   end
 end

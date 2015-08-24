@@ -5,6 +5,12 @@ Rails.application.routes.draw do
     member do
       get 'deliver'
     end
+    member do
+      get 'process_line' #cannot be process due to rails bug
+    end
+    member do
+      get 'cancel'
+    end
   end
   get '/order_lines_pending' => 'order_lines#pending'
 

@@ -64,7 +64,7 @@ class OrderLinesController < ApplicationController
 
   # GET /order_lines_pending.json
   def pending
-    @pendingOrderLines = OrderLine.get_submitted
+    @pendingOrderLines = OrderLine.get_pending
   end
   
   # GET /order_lines/1/deliver.json  
@@ -73,7 +73,35 @@ class OrderLinesController < ApplicationController
       order_line.status = OrderLine.status_delivered
       respond_to do |format|
         if order_line.save
-          @pendingOrderLines = OrderLine.get_submitted
+          @pendingOrderLines = OrderLine.get_pending
+          format.json { render :pending, status: :ok }
+        else
+          format.json { render json: @order_line.errors, status: :unprocessable_entity }
+        end
+      end    
+  end
+  
+  # GET /order_lines/1/process_line.json  
+  def process_line
+      order_line = OrderLine.find(params[:id])
+      order_line.status = OrderLine.status_processing
+      respond_to do |format|
+        if order_line.save
+          @pendingOrderLines = OrderLine.get_pending
+          format.json { render :pending, status: :ok }
+        else
+          format.json { render json: @order_line.errors, status: :unprocessable_entity }
+        end
+      end    
+  end
+  
+  # GET /order_lines/1/cancel.json  
+  def cancel
+      order_line = OrderLine.find(params[:id])
+      order_line.status = OrderLine.status_canceled
+      respond_to do |format|
+        if order_line.save
+          @pendingOrderLines = OrderLine.get_pending
           format.json { render :pending, status: :ok }
         else
           format.json { render json: @order_line.errors, status: :unprocessable_entity }
