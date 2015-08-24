@@ -1,7 +1,12 @@
 Rails.application.routes.draw do
   resources :reviews
 
-  resources :order_lines
+  resources :order_lines do
+    member do
+      get 'deliver'
+    end
+  end
+  get '/order_lines_pending' => 'order_lines#pending'
 
   resources :orders
 

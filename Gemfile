@@ -12,6 +12,8 @@ gem 'sdoc',         '0.4.0', group: :doc
 gem 'pg'
 gem 'execjs'
 gem 'therubyracer', :platforms => :ruby
+gem "paperclip", "~> 4.3"
+gem 'angularjs-rails'
 
 #login
 gem 'omniauth'
