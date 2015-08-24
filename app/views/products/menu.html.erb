@@ -1,5 +1,36 @@
 <% provide(:menu, "menu") %>
 
-<div class="page-header">
-  <h1>Menu</h1>
-</div>
+
+<% previous_cat = nil %>
+<% @products.each_with_index do |p, index| %>
+
+	<% if previous_cat != p.category.id %>
+		<% if index != 0 %>
+			</div>
+		<% end %>
+		<div class="category_header"><%= p.category.name %></div>
+		<div class="row">
+	<% end %>
+	
+	<div class="col-lg-3 col-md-6">
+	    <div class="panel panel-primary">
+	        <div class="panel-heading">
+	        	<%= link_to p.name, p %>
+	        </div>
+	        <div class="panel-body">
+	        	<div class="row">
+	        		<div class="col-xs-3"><%= image_tag p.image.url(:medium) %></div>
+					<div class="col-xs-9"><%= p.description %></div>
+	        	</div>
+			</div>
+			<div class="panel-footer">
+				<strong><%= number_to_currency(p.price) %></strong>
+			</div>
+		</div>
+	</div>
+	<% if index+1 == @products.length %>
+		</div>
+	<% end %>
+	<% previous_cat = p.category.id %>
+	
+<% end %>

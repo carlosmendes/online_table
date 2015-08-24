@@ -16,3 +16,11 @@
 
 @import "font-awesome-sprockets";
 @import "font-awesome";
+@import "bootstrap-variables.scss";
+
+.section_header {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  border-bottom: 1px solid $brand-primary;
+  font-size: 1.5em;
+}

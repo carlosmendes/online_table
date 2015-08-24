@@ -6,4 +6,22 @@ class OrderLine < ActiveRecord::Base
   
   belongs_to :product
   belongs_to :order
+  
+  STATUS = ['Draft', 'Submitted', 'Processing', 'Delivered', 'Canceled']
+  
+  def self.status_draft
+    OrderLine::STATUS[0]
+  end
+
+  def self.status_submitted
+    OrderLine::STATUS[1]
+  end
+
+  def self.status_delivered
+    OrderLine::STATUS[3]
+  end
+  
+  def self.get_submitted
+    OrderLine.includes(:product, :order => :table).where(:status => OrderLine.status_submitted).order(:created_at)
+  end
 end

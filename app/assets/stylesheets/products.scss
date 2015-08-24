@@ -1,3 +1,15 @@
 // Place all the styles related to the Products controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+@import "bootstrap-variables.scss";
+
+.category_header {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  border-bottom: 1px solid $brand-primary;
+  font-size: 1.5em;
+}
+
+.panel-heading a {
+  color: white !important;
+}

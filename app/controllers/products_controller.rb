@@ -11,7 +11,7 @@ class ProductsController < ApplicationController
   # GET /products
   # GET /products.json
   def menu
-    @products = Product.where(:active => true).all
+    @products = Product.includes(:category).where(:active => true).order('categories.order').all
   end
   
   # GET /products/1
@@ -76,6 +76,6 @@ class ProductsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def product_params
-      params.require(:product).permit(:name, :short_name, :description, :category_id, :sub_category_id, :order, :active)
+      params.require(:product).permit(:name, :short_name, :price, :description, :category_id, :sub_category_id, :order, :active, :image)
     end
 end

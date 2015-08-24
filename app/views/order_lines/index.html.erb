@@ -16,7 +16,7 @@
             <th>Product</th>
             <th>Quantity</th>
             <th>Value</th>
-            <th>Delivered</th>
+            <th>Status</th>
             <th></th>
         <th></th>
         <th></th>
@@ -29,7 +29,7 @@
             <td><%= order_line.product_id %></td>
             <td><%= order_line.quantity %></td>
             <td><%= order_line.value %></td>
-            <td><%= order_line.delivered %></td>
+            <td><%= order_line.status %></td>
             <td><%= link_to 'Show', order_line %></td>
         <td><%= link_to 'Edit', edit_order_line_path(order_line) %></td>
         <td><%= link_to 'Destroy', order_line, method: :delete, data: { confirm: 'Are you sure?' } %></td>

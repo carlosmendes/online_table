@@ -25,6 +25,15 @@ module SessionsHelper
     end
   end
 
+  def current_order
+    if logged_in?
+      o = Order.where(:client_id => current_user.id, :status => "Draft").first
+    else
+      o = Order.where(:session_cookie => session[:cookie_store], :status => "Draft").first
+    end
+    o  
+  end
+  
   # Returns true if the user is logged in, false otherwise.
   def logged_in?
     !current_user.nil?

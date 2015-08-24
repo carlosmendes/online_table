@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :check_manager
+  before_action :check_manager, only: [:index]
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   # GET /users

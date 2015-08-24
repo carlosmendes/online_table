@@ -1,40 +1,48 @@
 <% provide(:menu, "home") %>
 
 <div class="page-header">
-  <%= link_to products_path, class: 'btn btn-default' do %>
+  <%= link_to menu_path, class: 'btn btn-default' do %>
     <span class="glyphicon glyphicon-list-alt"></span>
-    Back
+    Menu
   <% end %>
-  <%= link_to edit_product_path(@product), class: 'btn btn-primary' do %>
-    <span class="glyphicon glyphicon-pencil"></span>
-    Edit
+  <% if manager? %>
+	  <%= link_to products_path, class: 'btn btn-default' do %>
+	    <span class="glyphicon glyphicon-list-alt"></span>
+	    List
+	  <% end %>
+	  <%= link_to edit_product_path(@product), class: 'btn btn-primary' do %>
+	    <span class="glyphicon glyphicon-pencil"></span>
+	    Edit
+	  <% end %>
   <% end %>
-  <h1>Show product</h1>
+  <h1>Product <%= @product.name %> - <%= number_to_currency(@product.price) %></h1>
 </div>
 
-<dl class="dl-horizontal">
-  <dt>Name:</dt>
-  <dd><%= @product.name %></dd>
-
-  <dt>Short name:</dt>
-  <dd><%= @product.short_name %></dd>
-  
-  <dt>Price:</dt>
-  <dd><%= number_to_currency(@product.price) %></dd>
-  
-  <dt>Description:</dt>
-  <dd><%= @product.description %></dd>
-
-  <dt>Category:</dt>
-  <dd><%= link_to @product.category.name, @product.category unless @product.category.nil? %></dd>
-
-  <dt>Sub category:</dt>
-  <dd><%= link_to @product.sub_category.name, @product.sub_category unless @product.sub_category.nil? %></dd>
-
-  <dt>Order:</dt>
-  <dd><%= @product.order %></dd>
-
-  <dt>Active:</dt>
-  <dd><%= @product.active %></dd>
-
-</dl>
+<div class="row">
+	<div class="col-md-9">
+		<dl class="dl-horizontal">
+		
+		  <dt>Short name</dt>
+		  <dd><%= @product.short_name %></dd>
+		  
+		  <dt>Description</dt>
+		  <dd><%= @product.description %></dd>
+		
+		  <dt>Category</dt>
+		  <dd><%= link_to @product.category.name, @product.category unless @product.category.nil? %></dd>
+		
+		  <dt>Sub category</dt>
+		  <dd><%= link_to @product.sub_category.name, @product.sub_category unless @product.sub_category.nil? %></dd>
+		
+		  <dt>Order</dt>
+		  <dd><%= @product.order %></dd>
+		
+		  <dt>Active</dt>
+		  <dd><%= @product.active %></dd>
+		
+		</dl>
+	</div>
+	<div class="col-md-3">
+		<%= image_tag @product.image.url(:medium) %>
+	</div>
+</div>

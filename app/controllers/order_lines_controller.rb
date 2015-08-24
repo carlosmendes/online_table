@@ -62,6 +62,25 @@ class OrderLinesController < ApplicationController
     end
   end
 
+  # GET /order_lines_pending.json
+  def pending
+    @pendingOrderLines = OrderLine.get_submitted
+  end
+  
+  # GET /order_lines/1/deliver.json  
+  def deliver
+      order_line = OrderLine.find(params[:id])
+      order_line.status = OrderLine.status_delivered
+      respond_to do |format|
+        if order_line.save
+          @pendingOrderLines = OrderLine.get_submitted
+          format.json { render :pending, status: :ok }
+        else
+          format.json { render json: @order_line.errors, status: :unprocessable_entity }
+        end
+      end    
+  end
+  
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_order_line
@@ -70,6 +89,6 @@ class OrderLinesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def order_line_params
-      params.require(:order_line).permit(:order_id, :product_id, :quantity, :value, :delivered)
+      params.require(:order_line).permit(:order_id, :product_id, :quantity, :value, :status)
     end
 end
