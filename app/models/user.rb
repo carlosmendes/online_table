@@ -44,6 +44,8 @@ class User < ActiveRecord::Base
   def self.create_with_omniauth(auth)
     create! do |user|
       user.provider = auth['provider']
+      user.password = rand(32**10).to_s(32) #Optimize - try to disable validations so we do not need this
+      user.password_confirmation = user.password
       user.uid = auth['uid']
       if auth['info']
          user.name = auth['info']['name'] || ""
