@@ -1,0 +1,29 @@
+<div class="table-responsive">
+  <table class="table table-striped table-hover">
+    <thead>
+      <tr>
+            <th>Status</th>
+            <th class="text-right">Quantity</th>
+            <th>Product</th>
+            <th class="text-right">Amount</th>
+            <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% order_lines.each do |order_line| %>
+      	<tr>
+            <td><%= order_line.status %></td>
+            <td class="text-right <% if order_line.status == OrderLine.status_canceled %> canceled_line <% end %>"><%= order_line.quantity %></td>
+            <td <% if order_line.status == OrderLine.status_canceled %> class="canceled_line" <% end %>><%= order_line.product.name %></td>
+            <td class="text-right <% if order_line.status == OrderLine.status_canceled %> canceled_line <% end %>"><%= number_to_currency(order_line.value) %></td>
+            <td><%= link_to 'Show', order_line %></td>
+        	<td><%= link_to 'Edit', edit_order_line_path(order_line) %></td>
+        	<td><%= link_to 'Destroy', order_line, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      	</tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

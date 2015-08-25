@@ -1,0 +1,9 @@
+
+	<tr class="fields">
+		<td><%= f.select :product_id, Product.all.map { |p| [p.name, p.id] }, {:include_blank => '-' }  %></td>
+		<td class="text-right"><%= f.text_field :quantity %></td>
+		<td class="text-right"><%= f.text_field :value %></td>
+		<td><%= f.select :status, OrderLine::STATUS, {:include_blank => '-' }  %></td>
+		<td><%= link_to_remove_fields 'Delete', f %></td>
+	</tr>
+

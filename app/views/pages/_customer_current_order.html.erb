@@ -1,0 +1,45 @@
+	<% if !current_order.nil? %>
+		<div ng-controller="CurrentOrderController as store">
+			<div class="row text-center">
+				<button ng-hide="waiterRequested(store.order.status) || paymentRequested(store.order.status)" class="btn btn-sm btn-primary" ng-click="requestWaiter(store.order.id)"><i class="fa fa-male"></i>  Call Waiter</button>
+				<button ng-hide="paymentRequested(store.order.status)" class="btn btn-sm btn-primary" ><i class="fa fa-plus"></i>  Add Product</button>
+				<button ng-hide="paymentRequested(store.order.status)" class="btn btn-sm btn-primary" ng-click="requestPayment(store.order.id)"><i class="fa fa-money"></i>  Pay</button>
+			</div>
+			<div class="section_header">
+				<div class="row">
+					<div class="col-xs-9">
+						Current Order '{{ store.order.id }}' 
+						<span ng-show="waiterRequested(store.order.status)"> - Waiter Requested</span>
+						<span ng-show="paymentRequested(store.order.status)"> - Payment Requested</span>
+					</div>
+					<div class="col-xs-3 text-right">
+						<strong>Total {{ store.order.total | currency }}</strong>
+					</div>
+				</div>
+			</div>
+			
+			<div class="table-responsive">
+			  <table class="table table-striped table-hover">
+			    <thead>
+			      <tr>
+			     	<th>Status</th>
+			      	<th class="text-right">Quantity</th>
+		            <th>Product</th>
+		            <th class="text-right">Amount</th>
+			      </tr>
+			    </thead>
+			
+			    <tbody>
+			      <tr ng-repeat="line in store.order.order_lines">
+		            <td>{{ line.status }}</td>
+		            <td class="text-right">{{ line.quantity }}</td>
+		            <td ng-show="isCanceled(line.status)" class="canceled_line">{{ line.product.name }}</td> 
+		            <td ng-hide="isCanceled(line.status)">{{ line.product.name }}</td>            
+		            <td ng-show="isCanceled(line.status)" class="text-right canceled_line">{{ line.value | currency }}</td>
+		            <td ng-hide="isCanceled(line.status)" class="text-right">{{ line.value | currency }}</td>
+			      </tr>
+			    </tbody>
+			  </table>
+			</div>
+		</div>
+	<% end %>
