@@ -67,11 +67,6 @@
 		});
     };
 	
-	this.load = function(){
-		this.getOrdersWaitingWaiter();
-		this.getOrdersWaitingPayment();
-	};
-	
     $scope.pay = function(order_id) {
       $http.get('/orders/'+order_id+'/pay.json')
 		.success(function(data){
@@ -89,15 +84,18 @@
     $scope.cancel = function(order_id) {
       $http.get('/orders/'+order_id+'/cancel.json')
 		.success(function(data){
-		  this.load();
+			this.getOrdersWaitingWaiter;
+			this.getOrdersWaitingPayment;
 		});
     };
 	       	
  	//Put in interval, first trigger after 5 seconds 
-    $interval(this.load(), 5000);      
+    $interval(this.getOrdersWaitingWaiter, 5000);  
+    $interval(this.getOrdersWaitingPayment, 5000);      
 
 	//initial load
-	this.load();
+	this.getOrdersWaitingWaiter();
+	this.getOrdersWaitingPayment();
 	
   }]);
 
