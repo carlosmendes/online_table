@@ -16,51 +16,28 @@
 	<div class="col-md-4">
 		<dl class="dl-vertical">
 		  <dt>Client</dt>
-		  <dd><%= link_to @order.client.name, @order.client %></dd>
+		  <dd><%= link_to @order.client.name, @order.client unless @order.client.nil? %></dd>
 		
 		  <dt>Waiter</dt>
-		  <dd><%= link_to @order.waiter.name, @order.waiter %></dd>
+		  <dd><%= link_to @order.waiter.name, @order.waiter unless @order.waiter.nil? %></dd>
 		</dl>
 	</div>
 	<div class="col-md-4">
 		<dl class="dl-vertical">
 		  <dt>Table</dt>
-		  <dd><%= @order.table.name %></dd>
+		  <dd><%= @order.table.name unless @order.table.nil? %></dd>
 		  <dt>Status</dt>
 		  <dd><%= @order.status %></dd>
 		</dl>
 	</div>
 	<div class="col-md-4">
 		<dl class="dl-vertical">
+		  <dt>Date</dt>
+		  <dd><%= @order.created_at %></dd>
 		  <dt>Total</dt>
 		  <dd><h4><%= number_to_currency(@order.total) %></h4></dd>
 		</dl>
 	</div>
 </div>
-<div class="table-responsive">
-  <table class="table table-striped table-hover">
-    <thead>
-      <tr>
-            <th>Product</th>
-            <th>Quantity</th>
-            <th>Amount</th>
-            <th>Status</th>
-            <th></th>
-        <th></th>
-        <th></th>
-      </tr>
-    </thead>
 
-    <tbody>
-      <%= content_tag_for(:tr, @order.order_lines) do |order_line| %>
-            <td><%= order_line.product.name %></td>
-            <td><%= order_line.quantity %></td>
-            <td><%= number_to_currency(order_line.value) %></td>
-            <td><%= order_line.status %></td>
-            <td><%= link_to 'Show', order_line %></td>
-        <td><%= link_to 'Edit', edit_order_line_path(order_line) %></td>
-        <td><%= link_to 'Destroy', order_line, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      <% end %>
-    </tbody>
-  </table>
-</div>
+<%= render 'order_lines/list', :order_lines => @order.order_lines %>

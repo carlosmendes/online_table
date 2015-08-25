@@ -104,7 +104,7 @@ class OrderLinesController < ApplicationController
           @pendingOrderLines = OrderLine.get_pending
           format.json { render :pending, status: :ok }
         else
-          format.json { render json: @order_line.errors, status: :unprocessable_entity }
+          format.json { render json: order_line.errors, status: :unprocessable_entity }
         end
       end    
   end

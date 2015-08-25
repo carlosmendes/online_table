@@ -1,4 +1,3 @@
 json.array!(@orders) do |order|
-  json.extract! order, :id, :client_id, :waiter_id, :table_id, :total, :status
-  json.url order_url(order, format: :json)
+	json.partial! 'order', order: order
 end

@@ -26,10 +26,11 @@ module SessionsHelper
   end
 
   def current_order
+    o = Order.where(:status => Order.status_active)
     if logged_in?
-      o = Order.where(:client_id => current_user.id, :status => "Draft").first
+      o = o.where(:client_id => current_user.id).first
     else
-      o = Order.where(:session_cookie => session[:cookie_store], :status => "Draft").first
+      o = o.where(:session_cookie => session[:cookie_store]).first
     end
     o  
   end
@@ -52,6 +53,13 @@ module SessionsHelper
   
   def waiter?
       logged_in? and current_user.waiter == true
+  end
+
+  def check_waiter
+    unless waiter?
+      flash[:error] = "Invalid Permissions"
+      redirect_to root_path
+    end  
   end
   
   # Forgets a persistent session.

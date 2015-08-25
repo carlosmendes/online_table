@@ -82,7 +82,7 @@ class UsersController < ApplicationController
 
     def user_params_update
       if manager?
-        params.require(:user).permit(:name, :email, :phone, :manager, :waiter, :receive_news)
+        params.require(:user).permit(:name, :email, :phone, :manager, :waiter, :receive_news, :password)
       else
         params.require(:user).permit(:name, :email, :phone)
       end

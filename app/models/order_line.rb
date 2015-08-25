@@ -1,6 +1,6 @@
 class OrderLine < ActiveRecord::Base
   validates :product_id, presence: true
-  validates :order_id, presence: true
+  #validates :order_id, presence: true
   validates :quantity, presence: true, numericality: { greater_than_or_equal_to: 1 }
   validates :value, presence: true, numericality: { greater_than_or_equal_to: 0 }
   
@@ -10,7 +10,7 @@ class OrderLine < ActiveRecord::Base
   after_save :update_total
   after_destroy :update_total
   
-  STATUS = ['Draft', 'Submitted', 'Processing', 'Delivered', 'Canceled']
+  STATUS = ['Draft', 'Requested', 'Processing', 'Delivered', 'Canceled']
 
   def update_total
     self.order.total = OrderLine.where(:order_id => self.order_id).where('order_lines.status != ?',OrderLine.status_canceled).sum(:value)  
@@ -21,7 +21,7 @@ class OrderLine < ActiveRecord::Base
     OrderLine::STATUS[0]
   end
 
-  def self.status_submitted
+  def self.status_requested
     OrderLine::STATUS[1]
   end
 
@@ -38,6 +38,9 @@ class OrderLine < ActiveRecord::Base
   end
     
   def self.get_pending
-    OrderLine.includes(:product, :order => :table).where(:status => [OrderLine.status_submitted, OrderLine.status_processing]).order(:created_at)
+    OrderLine.joins(:product, :order => :table)
+      .where(:status => [OrderLine.status_requested, OrderLine.status_processing])
+      .where('orders.status IN (?)',Order.status_active)
+      .order(:created_at)
   end
 end

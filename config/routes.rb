@@ -14,8 +14,27 @@ Rails.application.routes.draw do
   end
   get '/order_lines_pending' => 'order_lines#pending'
 
-  resources :orders
-
+  resources :orders do
+    member do
+      get 'request_waiter'
+    end
+    member do
+      get 'processing'
+    end
+    member do
+      get 'request_payment'
+    end
+    member do
+      get 'pay'
+    end
+    member do
+      get 'cancel'
+    end
+  end
+  get '/current_order' => 'orders#current'
+  get '/orders_waiting_waiter' => 'orders#waiting_waiter'
+  get '/orders_waiting_payment' => 'orders#waiting_payment'
+  
   resources :products
 
   resources :sub_categories

@@ -9,21 +9,21 @@
     <span class="glyphicon glyphicon-pencil"></span>
     Edit
   <% end %>
-  <h1>Show order_line</h1>
+  <h1>Show Order Line</h1>
 </div>
 
 <dl class="dl-horizontal">
-  <dt>Order:</dt>
-  <dd><%= @order_line.order_id %></dd>
+  <dt>Order</dt>
+  <dd><%= link_to @order_line.order_id, @order_line.order %></dd>
 
-  <dt>Product:</dt>
-  <dd><%= @order_line.product_id %></dd>
+  <dt>Product</dt>
+  <dd><%= link_to @order_line.product.name, @order_line.product %></dd>
 
-  <dt>Quantity:</dt>
+  <dt>Quantity</dt>
   <dd><%= @order_line.quantity %></dd>
 
-  <dt>Value:</dt>
-  <dd><%= @order_line.value %></dd>
+  <dt>Amount</dt>
+  <dd><%= number_to_currency(@order_line.value) %></dd>
 
   <dt>Status</dt>
   <dd><%= @order_line.status %></dd>

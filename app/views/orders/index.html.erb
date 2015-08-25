@@ -16,7 +16,7 @@
             <th>Client</th>
             <th>Waiter</th>
             <th>Table</th>
-            <th>Total</th>
+            <th class="text-right">Total</th>
             <th>Status</th>
             <th></th>
         <th></th>
@@ -27,10 +27,10 @@
     <tbody>
       <%= content_tag_for(:tr, @orders) do |order| %>
             <td><%= order.id %></td>
-            <td><%= order.client_id %></td>
-            <td><%= order.waiter.name %></td>
-            <td><%= order.table_id %></td>
-            <td><%= number_to_currency(order.total) %></td>
+            <td><%= link_to order.client.name, order.client unless order.client.nil? %></td>
+            <td><%= link_to order.waiter.name, order.waiter unless order.waiter.nil? %></td>
+            <td><%= order.table.name unless order.table.nil? %></td>
+            <td class="text-right"><%= number_to_currency(order.total) %></td>
             <td><%= order.status %></td>
             <td><%= link_to 'Show', order %></td>
         <td><%= link_to 'Edit', edit_order_path(order) %></td>

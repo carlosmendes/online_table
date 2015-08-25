@@ -112,6 +112,9 @@ GEM
       rails-dom-testing (~> 1.0)
       railties (>= 4.2.0)
       thor (>= 0.14, < 2.0)
+    jquery-turbolinks (2.1.0)
+      railties (>= 3.1.0)
+      turbolinks
     json (1.8.1)
     jwt (1.5.1)
     kaminari (0.16.3)
@@ -287,6 +290,7 @@ DEPENDENCIES
   high_voltage
   jbuilder (= 2.2.3)
   jquery-rails (= 4.0.3)
+  jquery-turbolinks
   launchy
   omniauth
   omniauth-facebook
