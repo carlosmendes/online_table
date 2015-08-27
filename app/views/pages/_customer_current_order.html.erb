@@ -4,8 +4,8 @@
 				<button ng-hide="waiterRequested(store.order.status) || paymentRequested(store.order.status)" class="btn btn-md btn-primary" ng-click="requestWaiter(store.order.id)"><i class="fa fa-male"></i>  Call Waiter</button>
 				<button ng-hide="paymentRequested(store.order.status)" class="btn btn-md btn-primary" ><i class="fa fa-plus"></i>  Add Product</button>
 				<button ng-hide="paymentRequested(store.order.status)" class="btn btn-md btn-primary" ng-click="requestPayment(store.order.id)"><i class="fa fa-money"></i>  Pay</button>
-				<br />
 			</div>
+			<br />
 			<div class="section_header">
 				<div class="row">
 					<div class="col-xs-7">
@@ -14,7 +14,7 @@
 						<i class="fa fa-money" ng-show="paymentRequested(store.order.status)"></i>
 					</div>
 					<div class="col-xs-5 text-right">
-						<strong>Total {{ store.order.total | currency }}</strong>
+						<strong>{{ store.order.total | currency }}</strong>
 					</div>
 				</div>
 			</div>
@@ -33,7 +33,7 @@
 			    <tbody>
 			      <tr ng-repeat="line in store.order.order_lines">
 		            <td>{{ line.status }}</td>
-		            <td class="text-right">{{ line.quantity }}</td>
+		            <td class="text-right">{{ line.quantity | number: 0 }}</td>
 		            <td ng-show="isCanceled(line.status)" class="canceled_line">{{ line.product.name }}</td> 
 		            <td ng-hide="isCanceled(line.status)">{{ line.product.name }}</td>            
 		            <td ng-show="isCanceled(line.status)" class="text-right canceled_line">{{ line.value | currency }}</td>

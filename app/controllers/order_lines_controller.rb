@@ -26,7 +26,12 @@ class OrderLinesController < ApplicationController
   # POST /order_lines.json
   def create
     @order_line = OrderLine.new(order_line_params)
-
+    
+    if @order_line.order_id.nil?
+      @order_line.order_id = current_order.id
+      @order_line.value = @order_line.product.price*@order_line.quantity
+      @order_line.status = OrderLine.status_requested
+    end
     respond_to do |format|
       if @order_line.save
         format.html { redirect_to @order_line, notice: 'Order line was successfully created.' }

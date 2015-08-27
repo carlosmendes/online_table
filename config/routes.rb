@@ -12,6 +12,7 @@ Rails.application.routes.draw do
       get 'cancel'
     end
   end
+  post 'order_lines/create'
   get '/order_lines_pending' => 'order_lines#pending'
 
   resources :orders do
@@ -36,6 +37,7 @@ Rails.application.routes.draw do
   get '/orders_waiting_payment' => 'orders#waiting_payment'
   
   resources :products
+  get 'menu' => 'products#menu' 
 
   resources :sub_categories
 
@@ -55,7 +57,6 @@ Rails.application.routes.draw do
   get '/signout' => 'sessions#destroy', :as => :signout
   get '/auth/failure' => 'sessions#failure'
     
-  get    'menu'    => 'products#menu' 
 
   root to: 'pages#home'
 end

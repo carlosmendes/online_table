@@ -8,10 +8,13 @@ class ProductsController < ApplicationController
     @products = Product.all
   end
 
-  # GET /products
-  # GET /products.json
+  # GET /menu
+  # GET /menu.json
   def menu
     @products = Product.includes(:category).where(:active => true).order('categories.order').all
+    #respond_to do |format|
+     # format.json { render :index }
+    #end
   end
   
   # GET /products/1

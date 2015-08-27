@@ -20,7 +20,7 @@
 		            <td>{{ line.created_at | date:'yyyy-MM-dd HH:mm' }}</td>
 		            <td>{{ line.order_id }}</td>		            
 		            <td>{{ line.table.id }}</td>
-		            <td class="text-right">{{ line.quantity }}</td>
+		            <td class="text-right">{{ line.quantity | number: 0 }}</td>
 		            <td>{{ line.product.short_name }}</td>
 		            <td>{{ line.status }}</td>
 			        <td>

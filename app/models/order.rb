@@ -38,4 +38,5 @@ class Order < ActiveRecord::Base
   def self.status_canceled
     Order::STATUS[5]
   end
+  
 end

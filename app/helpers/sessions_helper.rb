@@ -30,7 +30,7 @@ module SessionsHelper
     if logged_in?
       o = o.where(:client_id => current_user.id).first
     else
-      o = o.where(:session_cookie => session[:cookie_store]).first
+      o = o.where(:session_cookie => get_unregistered_cookie).first
     end
     o  
   end
@@ -75,4 +75,13 @@ module SessionsHelper
     session.delete(:user_id)
     @current_user = nil
   end
+
+  def create_unregistered_cookie
+    cookies.permanent[:unregistered] = SecureRandom.urlsafe_base64
+  end
+  
+  def get_unregistered_cookie
+    cookies[:unregistered]
+  end
+  
 end
