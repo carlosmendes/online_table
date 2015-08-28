@@ -1,33 +1,37 @@
 <% provide(:menu, "menu") %>
 
-<div ng-app="productsApp" ng-controller="MenuController as menu">
+<div ng-app="productsApp">
 	
-	<% previous_cat = nil %>
-	<% @products.each_with_index do |p, index| %>
+	<%= render 'pages/customer_current_order' %>
 	
-		<% if previous_cat != p.category.id %>
-			<% if index != 0 %>
+	<div ng-controller="MenuController as menu">
+		<% previous_cat = nil %>
+		<% @products.each_with_index do |p, index| %>
+		
+			<% if previous_cat != p.category.id %>
+				<% if index != 0 %>
+					</div>
+				<% end %>
+				<div class="category_header"><%= p.category.name %></div>
+				<div class="row">
+			<% end %>
+			
+			<div class="col-lg-3 col-md-4 col-sm-6">
+				<div class="highlight alt">
+					<a style="cursor: pointer;" ng-click="order(<%= p.id.to_s %>)">
+							<header>
+								<h2><%= p.name %></h2>
+								<p><%= number_to_currency(p.price) %></p>
+							</header>
+					</a>
+				</div>
+			</div>
+			
+			<% if index+1 == @products.length %>
 				</div>
 			<% end %>
-			<div class="category_header"><%= p.category.name %></div>
-			<div class="row">
+			<% previous_cat = p.category.id %>
+			
 		<% end %>
-		
-		<div class="col-lg-3 col-md-6">
-			<div class="highlight alt">
-				<a style="cursor: pointer;" ng-click="order(<%= p.id.to_s %>)">
-						<header>
-							<h2><%= p.name %></h2>
-							<p><%= number_to_currency(p.price) %></p>
-						</header>
-				</a>
-			</div>
-		</div>
-		
-		<% if index+1 == @products.length %>
-			</div>
-		<% end %>
-		<% previous_cat = p.category.id %>
-		
-	<% end %>
+	</div>
 </div>

@@ -1,5 +1,5 @@
 (function() {
-  var app = angular.module('productsApp', []);
+  var app = angular.module('productsApp', ['ordersApp']);
 
   app.controller('MenuController', ['$http','$scope', '$interval', function($http, $scope, $interval){
 

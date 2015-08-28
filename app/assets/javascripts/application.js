@@ -16,4 +16,7 @@
 //= require angular
 //= require turbolinks
 //= require bootstrap-sprockets
+//= require websocket_rails/main
 //= require_tree .
+
+

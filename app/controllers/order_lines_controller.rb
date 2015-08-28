@@ -34,6 +34,8 @@ class OrderLinesController < ApplicationController
     end
     respond_to do |format|
       if @order_line.save
+        # inform client
+        WebsocketRails['order_lines_'+@order_line.order.id.to_s].trigger 'new', {:order => @order_line.order, :order_line => @order_line, :product => @order_line.product}
         format.html { redirect_to @order_line, notice: 'Order line was successfully created.' }
         format.json { render :show, status: :created, location: @order_line }
       else

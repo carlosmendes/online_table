@@ -102,11 +102,22 @@
   app.controller('CurrentOrderController', ['$http','$scope', '$interval', function($http, $scope, $interval){
     var store = this;
     store.order = {};
-
+	
     this.getCurrentOrder = function() {
       $http.get('/current_order.json')
 		.success(function(data){
 			store.order = data;
+
+			if(store.order.id !== undefined){
+				channel = dispatcher.subscribe('order_lines_'+store.order.id);
+				channel.bind('new', function(order_data) {
+				  store.order.id = order_data.order.id;
+				  store.order.total = order_data.order.total;
+				  var aux_order_line = order_data.order_line;
+				  aux_order_line.product = order_data.product;
+				  store.order.order_lines.push(aux_order_line);
+				}); 
+			}
 		});
     };
 
@@ -143,10 +154,12 @@
 	};
 		       	
  	//Put in interval, first trigger after 5 seconds 
-    $interval(this.getCurrentOrder, 5000);      
+    //$interval(this.getCurrentOrder, 5000);     
 
 	//initial load
 	this.getCurrentOrder();
+	
+	var dispatcher = new WebSocketRails('localhost:3000/websocket');
 	
   }]);
   

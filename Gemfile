@@ -15,6 +15,7 @@ gem 'execjs'
 gem 'therubyracer', :platforms => :ruby
 gem "paperclip", "~> 4.3"
 gem 'angularjs-rails'
+gem 'websocket-rails'
 
 #login
 gem 'omniauth'
