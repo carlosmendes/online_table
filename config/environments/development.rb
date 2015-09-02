@@ -41,4 +41,5 @@ Rails.application.configure do
   
   # Remove the Rack::Lock middleware - Webscockets
   config.middleware.delete Rack::Lock
+  
 end
