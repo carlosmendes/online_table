@@ -102,6 +102,7 @@
   app.controller('CurrentOrderController', ['$http','$scope', '$interval', function($http, $scope, $interval){
     var store = this;
     store.order = {};
+	var dispatcher = new WebSocketRails(document.domain+':'+location.port+'/websocket');
 	
     this.getCurrentOrder = function() {
       $http.get('/current_order.json')
@@ -158,8 +159,6 @@
 
 	//initial load
 	this.getCurrentOrder();
-	
-	var dispatcher = new WebSocketRails('localhost:3000/websocket');
 	
   }]);
   

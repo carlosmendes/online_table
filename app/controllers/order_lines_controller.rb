@@ -1,5 +1,5 @@
 class OrderLinesController < ApplicationController
-  before_action :check_manager
+  before_action :check_create_permission
   before_action :set_order_line, only: [:show, :edit, :update, :destroy]
 
   # GET /order_lines
@@ -125,5 +125,19 @@ class OrderLinesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def order_line_params
       params.require(:order_line).permit(:order_id, :product_id, :quantity, :value, :status)
+    end
+    
+    def check_create_permission
+      if params[:id]
+        order_line = OrderLine.find(params[:id])
+      else
+        order_line = OrderLine.new(order_line_params)
+      end
+      if order_line.order_id.nil?
+        order = current_order
+      else
+        order = order_line.order
+      end
+      check_manager || check_waiter || order.client_id == current_user.id unless !logged_in? || order.session_cookie == get_unregistered_cookie
     end
 end
